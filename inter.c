@@ -1,5 +1,4 @@
 #include <unistd.h>
-#include <stdbool.h>
 
 void	ft_inter(char *str1, char *str2)
 {

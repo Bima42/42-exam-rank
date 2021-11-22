@@ -3,12 +3,12 @@
 
 bool	is_in_str(bool *tab, int c)
 {
-	if (tab[c] == 0)
+	if (tab[c] == false)
 	{
-		tab[c] = 1;
-		return (0);
+		tab[c] = true;
+		return (false);
 	}
-	return (1);
+	return (true);
 }
 
 void	ft_union(char *str1, char *str2)
