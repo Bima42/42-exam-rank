@@ -74,7 +74,7 @@ void	command(int argc, char **argv, char **envp, int prev, int *fd_prev)
 	next = is_pipe(argv);
 	if (argv[0])
 	{
-		if (next && pipe(fd_next))
+		if (next && pipe(fd_next) < 0)
 		{
 			write(STDERR_FILENO, "error: fatal\n", 13);
 			exit(1);
@@ -90,7 +90,7 @@ void	command(int argc, char **argv, char **envp, int prev, int *fd_prev)
 		{
 			if (prev && dup2(fd_prev[0], 0) < 0)
 				exit(-1);
-			if (next && dup2(fd_prev[1], 1) < 0)
+			if (next && dup2(fd_next[1], 1) < 0)
 				exit(-1);
 			if (execve(argv[0], argv, envp) < 0)
 			{
@@ -121,7 +121,7 @@ void	command(int argc, char **argv, char **envp, int prev, int *fd_prev)
 	i = 0;
 	while (argv[i])
 		i++;
-	command(argc - 1 - i, argv + 1 + i, envp, prev, fd_prev);
+	command(argc - 1 - i, argv + 1 + i, envp, next, fd_next);
 }
 
 int main(int argc, char **argv, char **envp)
