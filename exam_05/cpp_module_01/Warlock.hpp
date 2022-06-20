@@ -21,7 +21,7 @@ class Warlock {
 		Warlock &operator=(Warlock const &right);
 	
 	public:
-		Warlock (std::string const name, std::string const title);
+		Warlock (std::string const &name, std::string const &title);
 		virtual ~Warlock();
 
 		const std::string &getName() const;
