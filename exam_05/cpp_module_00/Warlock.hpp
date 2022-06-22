@@ -1,8 +1,8 @@
 #ifndef WARLOCK_HPP
 # define WARLOCK_HPP
 
-#include <string>
 #include <iostream>
+#include <string>
 
 class Warlock {
 
@@ -11,19 +11,19 @@ class Warlock {
 		std::string _title;
 
 		Warlock();
-		Warlock( Warlock const &copy );
+		Warlock(Warlock const &copy);
 		Warlock &operator=(Warlock const &right);
-	
+
 	public:
-		Warlock (std::string const &name, std::string const &title);
+		Warlock(std::string name, std::string title);
 		virtual ~Warlock();
 
 		const std::string &getName() const;
 		const std::string &getTitle() const;
 
-		void setTitle(std::string const title);
+		void setTitle (std::string const &title);
 
-		void introduce() const;
+		void introduce () const;
 };
 
 #endif

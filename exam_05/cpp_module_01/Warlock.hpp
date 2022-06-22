@@ -1,12 +1,12 @@
 #ifndef WARLOCK_HPP
 # define WARLOCK_HPP
 
-#include <string>
 #include <iostream>
+#include <string>
 #include <vector>
 class Warlock;
-#include "ASpell.hpp"
 #include "ATarget.hpp"
+#include "ASpell.hpp"
 
 class Warlock {
 
@@ -14,26 +14,26 @@ class Warlock {
 		std::string _name;
 		std::string _title;
 
-		std::vector<ASpell*> spells;
+		std::vector<ASpell*> _spells;
 
 		Warlock();
-		Warlock( Warlock const &copy );
+		Warlock(Warlock const &copy);
 		Warlock &operator=(Warlock const &right);
-	
+
 	public:
-		Warlock (std::string const &name, std::string const &title);
+		Warlock(std::string name, std::string title);
 		virtual ~Warlock();
 
 		const std::string &getName() const;
 		const std::string &getTitle() const;
 
-		void setTitle(std::string const title);
+		void setTitle (std::string const &title);
 
-		void introduce() const;
+		void introduce () const;
 
 		void learnSpell (ASpell *spell);
-		void forgetSpell (std::string spell_name);
-		void launchSpell (std::string spell_name, ATarget &target);
+		void forgetSpell (std::string name);
+		void launchSpell (std::string name, ATarget &target);
 };
 
 #endif

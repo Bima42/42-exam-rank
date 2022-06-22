@@ -1,27 +1,30 @@
 #ifndef ATARGET_HPP
 # define ATARGET_HPP
 
-#include <string>
 #include <iostream>
+#include <string>
 class ATarget;
 #include "ASpell.hpp"
 
 class ATarget {
 
-	private:
+	protected:
 		std::string _type;
-	
+
+		ATarget();
+
 	public:
-		ATarget (std::string const _type);
-		ATarget( ATarget const &copy );
-		ATarget &operator=(ATarget const &right);
+		ATarget(std::string type);
+		ATarget(ATarget const &copy);
 		virtual ~ATarget();
+
+		ATarget &operator=(ATarget const &right);
 
 		const std::string &getType() const;
 
-		void getHitBySpell ( ASpell const &spell ) const;
+		void getHitBySpell(ASpell const &spell) const;
 
-		virtual ATarget *clone() const = 0;
+		virtual ATarget *clone () const = 0;
 };
 
 #endif

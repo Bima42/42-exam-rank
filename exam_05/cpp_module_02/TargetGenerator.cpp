@@ -2,41 +2,38 @@
 
 TargetGenerator::TargetGenerator () {}
 
-TargetGenerator::~TargetGenerator() { 
-	std::vector<ATarget*>::iterator ite = this->target.end();
-	for (std::vector<ATarget*>::iterator it = this->target.begin(); it != ite; it++) {
-		delete *it;
-	}
-	this->target.clear();
-}
+TargetGenerator::~TargetGenerator () {}
 
-void TargetGenerator::learnTargetType (ATarget *target) {
-	if (target) {
-		std::vector<ATarget*>::iterator ite = this->target.end();
-		for (std::vector<ATarget*>::iterator it = this->target.begin(); it != ite; ++it) {
-			if ((*it)->getType() == target->getType())
+void TargetGenerator::learnTargetType (ATarget *type) {
+	if (type) 
+	{
+		std::vector<ATarget*>::iterator ite = this->_target.end();
+		for (std::vector<ATarget*>::iterator it = this->_target.begin(); it != ite; ++it) {
+			if ((*it)->getType() == type->getType())
 				return ;
 		}
-		this->target.push_back(target->clone());
+		this->_target.push_back(type->clone());
 	}
 }
 
 void TargetGenerator::forgetTargetType (std::string const &type) {
-	std::vector<ATarget*>::iterator ite = this->target.end();
-	for (std::vector<ATarget*>::iterator it = this->target.begin(); it != ite; ++it) {
+	std::vector<ATarget*>::iterator ite = this->_target.end();
+	for (std::vector<ATarget*>::iterator it = this->_target.begin(); it != ite; ++it) {
 		if ((*it)->getType() == type)
 		{
-			delete *it ;
-			it = this->target.erase(it);
+			delete (*it);
+			it = this->_target.erase(it);
 		}
 	}
+
 }
 
 ATarget *TargetGenerator::createTarget (std::string const &type) {
-	std::vector<ATarget*>::iterator ite = this->target.end();;
-	for (std::vector<ATarget*>::iterator it = this->target.begin(); it != ite; ++it) {
-		if ((*it)->getType() == type)
+	std::vector<ATarget*>::iterator ite = this->_target.end();
+	for (std::vector<ATarget*>::iterator it = this->_target.begin(); it != ite; ++it) {
+		if ((*it)->getType() == type) {
 			return (*it);
+		}
 	}
 	return (NULL);
 }

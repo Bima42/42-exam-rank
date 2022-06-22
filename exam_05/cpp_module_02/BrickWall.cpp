@@ -2,14 +2,8 @@
 
 BrickWall::BrickWall (): ATarget("Inconspicuous Red-brick Wall") {}
 
-BrickWall::BrickWall (BrickWall const &copy): ATarget(copy) {}
+BrickWall::~BrickWall () {}
 
-BrickWall &BrickWall::operator=(BrickWall const &right ) {
-	if (&right != this)
-		this->_type = right.getType();
-	return (*this);
+ATarget *BrickWall::clone () const {
+	return (new BrickWall());
 }
-
-BrickWall::~BrickWall() {}
-
-ATarget *BrickWall::clone () const { return (new BrickWall()); }

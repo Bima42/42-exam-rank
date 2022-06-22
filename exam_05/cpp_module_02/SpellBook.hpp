@@ -1,8 +1,8 @@
 #ifndef SPELLBOOK_HPP
 # define SPELLBOOK_HPP
 
-#include <string>
 #include <iostream>
+#include <string>
 #include <vector>
 class SpellBook;
 #include "ASpell.hpp"
@@ -10,19 +10,18 @@ class SpellBook;
 class SpellBook {
 
 	private:
-		std::vector<ASpell*> book;
+		std::vector<ASpell*> _book;
 
-		SpellBook( SpellBook const &copy );
+		SpellBook(SpellBook const &copy);
 		SpellBook &operator=(SpellBook const &right);
-	
+
 	public:
 		SpellBook();
-		SpellBook (std::string const name, std::string const title);
 		virtual ~SpellBook();
 
 		void learnSpell (ASpell *spell);
-		void forgetSpell (std::string const &spell_name);
-		ASpell *createSpell (std::string const &name); 
+		void forgetSpell (std::string const &name);
+		ASpell *createSpell (std::string const &name);
 };
 
 #endif
