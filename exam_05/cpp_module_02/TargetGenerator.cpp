@@ -2,7 +2,13 @@
 
 TargetGenerator::TargetGenerator () {}
 
-TargetGenerator::~TargetGenerator () {}
+TargetGenerator::~TargetGenerator () {
+	std::vector<ATarget*>::iterator ite = this->_target.end();
+	for (std::vector<ATarget*>::iterator it = this->_target.begin(); it != ite; ++it) {
+		delete (*it);
+	}
+	this->_target.clear();
+}
 
 void TargetGenerator::learnTargetType (ATarget *type) {
 	if (type) 

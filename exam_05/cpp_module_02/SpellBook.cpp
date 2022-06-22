@@ -2,7 +2,13 @@
 
 SpellBook::SpellBook () {}
 
-SpellBook::~SpellBook () {}
+SpellBook::~SpellBook () {
+		std::vector<ASpell*>::iterator ite = this->_book.end();
+		for (std::vector<ASpell*>::iterator it = this->_book.begin(); it != ite; ++it) {
+			delete (*it);
+		}
+		this->_book.clear();;
+}
 
 void SpellBook::learnSpell (ASpell *spell) {
 	if (spell) 
