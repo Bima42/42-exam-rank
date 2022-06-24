@@ -6,6 +6,11 @@ Warlock::Warlock ( std::string name, std::string title ): _name(name), _title(ti
 
 Warlock::~Warlock () {
 	std::cout << this->_name << ": My job here is done!" << std::endl;
+	std::vector<ASpell*>::iterator ite = this->_spells.end();
+	for (std::vector<ASpell*>::iterator it = this->_spells.begin(); it != ite; ++it ) {
+		delete (*it);
+	}
+	this->_spells.clear();
 }
 
 const std::string &Warlock::getName () const {
