@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-# define BUFF_SIZE 424242
 typedef struct client {
     int id;
     char msg[420000];
@@ -15,7 +14,7 @@ t_client clients[1024];
 
 int max = 0, next_id = 0;
 fd_set active, readyRead, readyWrite;
-char bufRead[BUFF_SIZE], bufWrite[BUFF_SIZE];
+char bufRead[424242], bufWrite[424242];
 
 void exitError(char *str)
 {
@@ -83,7 +82,7 @@ int main(int argc, char **argv)
             }
             if (FD_ISSET(fd, &readyRead) && fd != serverSock)
             {
-                int read = recv(fd, bufRead, BUFF_SIZE, 0);
+                int read = recv(fd, bufRead, 424242, 0);
                 if (read <= 0)
                 {
                     sprintf(bufWrite, "server: client %d just left\n", clients[fd].id);
