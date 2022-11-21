@@ -7,7 +7,7 @@
 
 typedef struct client {
     int id;
-    char msg[420000];
+    char msg[100000];
 } t_client;
 
 t_client clients[1024];
@@ -19,7 +19,7 @@ char bufRead[424242], bufWrite[424242];
 void exitError(char *str)
 {
     if (str)
-        write(1, str, strlen(str));
+        write(2, str, strlen(str));
     exit(1);
 }
 
@@ -34,17 +34,16 @@ void sendAll(int es)
 
 int main(int argc, char **argv)
 {
-    (void)argv;
     if (argc != 2)
         exitError("Wrong number of arguments\n");
     int port = atoi(argv[1]);
 
-    bzero(&clients, sizeof(clients));
-    FD_ZERO(&active);
-
     int serverSock = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSock < 0)
         exitError("Fatal error\n");
+
+    bzero(&clients, sizeof(clients));
+    FD_ZERO(&active);
 
     max = serverSock;
     FD_SET(serverSock, &active);
