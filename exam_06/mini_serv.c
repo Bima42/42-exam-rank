@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     if (serverSock < 0)
         exitError("Fatal error\n");
 
-    bzero(&clients, sizeof(clients));
+    bzero(clients, sizeof(clients));
     FD_ZERO(&active);
 
     max = serverSock;
