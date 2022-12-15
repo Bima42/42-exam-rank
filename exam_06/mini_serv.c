@@ -69,7 +69,7 @@ int main(int argc, char **argv)
         {
             if (FD_ISSET(fd, &readyRead) && fd == serverSock)
             {
-                int clientSocket = accept(serverSock, (struct sockaddr *)&addr, &addr_len);
+                int clientSocket = accept(serverSock, NULL, NULL);
                 if (clientSocket < 0)
                     continue;
                 max = (clientSocket > max) ? clientSocket : max;
