@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     if (serverSock < 0)
         exitError("Fatal error\n");
 
-    bzero(&clients, sizeof(clients));
+    bzero(clients, sizeof(clients));
     FD_ZERO(&active);
 
     max = serverSock;
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
     struct sockaddr_in addr;
     socklen_t addr_len = sizeof(addr);
     addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = htonl(2130706433);
+    addr.sin_addr.s_addr = (1 << 24) + 127; // "127.0.0.1", in network order
     addr.sin_port = htons(port);
 
     if ((bind(serverSock, (const struct sockaddr *)&addr, sizeof(addr))) < 0)
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
         {
             if (FD_ISSET(fd, &readyRead) && fd == serverSock)
             {
-                int clientSocket = accept(serverSock, (struct sockaddr *)&addr, &addr_len);
+                int clientSocket = accept(serverSock, NULL, NULL);
                 if (clientSocket < 0)
                     continue;
                 max = (clientSocket > max) ? clientSocket : max;
